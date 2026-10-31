@@ -1,0 +1,15 @@
+sequenceDiagram
+  participant Stub as Stub resolver
+  participant Rec as Recursive resolver
+  participant Root as Root DNS
+  participant TLD as TLD DNS
+  participant Auth as Authoritative DNS
+  Stub->>Rec: Query www.example.com A
+  Note over Rec: Check cache
+  Rec->>Root: Resolve/referral
+  Root-->>Rec: Referral to TLD
+  Rec->>TLD: Resolve/referral
+  TLD-->>Rec: Referral to authoritative NS
+  Rec->>Auth: Query A record
+  Auth-->>Rec: Answer + TTL
+  Rec-->>Stub: Cached answer

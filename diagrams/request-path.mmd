@@ -1,0 +1,10 @@
+flowchart TD
+  A[Browser / React] --> B[DNS resolver]
+  A -->|HTTPS TCP 443| C[VPS public IP]
+  C --> D[Cloud / host firewall]
+  D --> E[Nginx reverse proxy]
+  E -->|Private Docker network| F[Express API]
+  F -->|mongo:27017| G[MongoDB]
+  G --> F
+  F --> E
+  E --> A

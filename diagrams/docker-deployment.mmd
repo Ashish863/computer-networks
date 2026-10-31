@@ -1,0 +1,8 @@
+flowchart TB
+  U[Browser] -->|DNS + HTTPS 443| FW[VPS / Cloud Firewall]
+  FW --> N[Nginx container]
+  subgraph Private Docker bridge
+    N -->|backend:3000| API[Express API]
+    API -->|mongo:27017| DB[MongoDB]
+  end
+  V[(Persistent volume)] --- DB

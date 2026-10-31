@@ -1,0 +1,7 @@
+sequenceDiagram
+  participant C as Client
+  participant S as Server
+  C->>S: SYN, seq=x
+  S->>C: SYN-ACK, seq=y, ack=x+1
+  C->>S: ACK, ack=y+1
+  Note over C,S: TCP connection established
